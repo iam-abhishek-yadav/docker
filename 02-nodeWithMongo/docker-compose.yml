@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  webnodeserver:
+    build:  
+      context: ./app/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - mongonodeserver
+    networks:
+      - mynetwork
+
+  mongonodeserver:
+    image: "mongo:latest"
+    networks:
+      - mynetwork
+
+volumes:
+  mongodb_data:
+
+networks:
+  mynetwork:
